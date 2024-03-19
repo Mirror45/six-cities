@@ -1,9 +1,9 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import MainPages from '../pages/main-pages/main-pages';
-import Login from '../pages/login/login';
-import FavoritesList from '../pages/favorites/favorites';
-import Property from '../pages/property/property';
+import MainPages from '../pages/main-pages-screen/main-pages-screen';
+import Login from '../pages/login-screen/login-screen';
+import FavoritesList from '../pages/favorites-list-screen/favorites-list-screen';
+import Property from '../pages/property-screen/property-screen';
 
 type AppPlacesFoundProps = {
   countAmsterdam: number;

@@ -1,6 +1,10 @@
+import MainHeader from '../../main-header/main-header';
+import MainFooter from '../../main-footer/main-footer';
+
 function FavoritesList(): JSX.Element {
   return (
     <main className="page__main page__main--favorites">
+    <MainHeader/>
     <div className="page__favorites-container container">
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>
@@ -125,6 +129,7 @@ function FavoritesList(): JSX.Element {
         </ul>
       </section>
     </div>
+    <MainFooter/>
   </main>
   );
 }
