@@ -1,9 +1,13 @@
+import {Helmet} from 'react-helmet-async';
 import MainHeader from '../../main-header/main-header';
 import MainFooter from '../../main-footer/main-footer';
 
 function FavoritesList(): JSX.Element {
   return (
     <main className="page__main page__main--favorites">
+    <Helmet>
+      <title>Favorites list</title>
+    </Helmet>
     <MainHeader/>
     <div className="page__favorites-container container">
       <section className="favorites">
