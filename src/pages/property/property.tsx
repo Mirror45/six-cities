@@ -1,10 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import Header from '../header/header';
 
 function Property(): JSX.Element {
   return (
     <div className="page">
-      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

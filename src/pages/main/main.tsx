@@ -1,10 +1,13 @@
-import Card from '../card/card';
-import Header from '../header/header';
+import Card from '../../components/card/card';
+import { CardType } from '../../const';
 
-function Main(): JSX.Element {
+type MainType = {
+  card: CardType[];
+};
+
+function Main({ card }: MainType): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -75,11 +78,9 @@ function Main(): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {card.map((item) => (
+                  <Card key={item.id} {...item} />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">

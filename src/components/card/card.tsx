@@ -1,4 +1,6 @@
-function Card(): JSX.Element {
+import { CardType } from '../../const';
+
+function Card({ type }: CardType): JSX.Element {
   return (
     <article className="cities__place-card place-card">
       <div className="place-card__mark">
@@ -37,7 +39,7 @@ function Card(): JSX.Element {
         <h2 className="place-card__name">
           <a href="#">Beautiful &amp; luxurious apartment at great location</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
