@@ -1,25 +1,28 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import MainPages from '../pages/main-pages-screen/main-pages-screen';
-import Login from '../pages/login-screen/login-screen';
-import FavoritesList from '../pages/favorites-list-screen/favorites-list-screen';
-import Property from '../pages/property-screen/property-screen';
-import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
+import MainPages from '../../pages/main-pages-screen/main-pages-screen';
+import Login from '../../pages/login-screen/login-screen';
+import FavoritesList from '../../pages/favorites-list-screen/favorites-list-screen';
+import Property from '../../pages/property-screen/property-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
+import { Offers } from "../../types/offers";
 
-type AppPlacesFoundProps = {
+type AppScreenProps = {
   countAmsterdam: number;
+  offers: Offers[];
 }
 
-function App({countAmsterdam}: AppPlacesFoundProps): JSX.Element {
+function App({countAmsterdam, offers}: AppScreenProps): JSX.Element {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPages countAmsterdam={countAmsterdam} />}
+            element={<MainPages countAmsterdam={countAmsterdam} offers={offers}/>}
           />
           <Route
             path={AppRoute.Sign_In}
