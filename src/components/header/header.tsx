@@ -1,8 +1,8 @@
 type HeaderType = {
-  childlen?: JSX.Element;
+  children?: JSX.Element;
 };
 
-function Header({ childlen }: HeaderType): JSX.Element {
+function Header({ children }: HeaderType): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -18,7 +18,7 @@ function Header({ childlen }: HeaderType): JSX.Element {
               />
             </a>
           </div>
-          {childlen}
+          {children}
         </div>
       </div>
     </header>

@@ -3,11 +3,13 @@ import { CardType } from '../../const';
 
 type MainType = {
   card: CardType[];
+  children: JSX.Element;
 };
 
-function Main({ card }: MainType): JSX.Element {
+function Main({ card, children }: MainType): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      {children}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -1,6 +1,11 @@
-function Favorited(): JSX.Element {
+type FavoritedType = {
+  children: JSX.Element;
+};
+
+function Favorited({ children }: FavoritedType): JSX.Element {
   return (
     <div className="page">
+      {children}
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

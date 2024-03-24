@@ -1,57 +1,71 @@
-import React from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Cards, AppRoute } from '../../const';
+import { HelmetProvider } from 'react-helmet-async';
+import { AppRoute, AuthorizationStatus, Cards } from '../../const';
 import Main from '../../pages/main/main';
-import MainEmpty from '../main-empty/main-empty';
 import Header from '../header/header';
 import Favorited from '../../pages/favorited/favorited';
 import Login from '../../pages/login/login';
 import Property from '../../pages/property/property';
 import SignIn from '../header/signin/signin';
+import PrivateRoute from '../private-route/private-route';
+import NotFound from '../../pages/not-found/not-found';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={
-            <React.Fragment>
-              <Header></Header>
-              <Main card={Cards} />
-            </React.Fragment>
-          }
-        />
-        <Route
-          path={AppRoute.Favorited}
-          element={
-            <React.Fragment>
-              <Header />
-              <Favorited />
-            </React.Fragment>
-          }
-        />
-        <Route
-          path={AppRoute.SignIn}
-          element={
-            <React.Fragment>
-              <Header />
-              <Login />
-            </React.Fragment>
-          }
-        />
-        <Route
-          path={AppRoute.Room}
-          element={
-            <React.Fragment>
-              <Header />
-              <Property />
-            </React.Fragment>
-          }
-        />
-        <Route path="*" element={<MainEmpty />} />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={
+              <Main card={Cards}>
+                <Header>
+                  <SignIn />
+                </Header>
+              </Main>
+            }
+          />
+          <Route
+            path={AppRoute.Favorited}
+            element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+                <Favorited>
+                  <Header>
+                    <SignIn />
+                  </Header>
+                </Favorited>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.SignIn}
+            element={
+              <Login>
+                <Header />
+              </Login>
+            }
+          />
+          <Route
+            path={AppRoute.Room}
+            element={
+              <Property>
+                <Header>
+                  <SignIn />
+                </Header>
+              </Property>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <NotFound>
+                <Header />
+              </NotFound>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

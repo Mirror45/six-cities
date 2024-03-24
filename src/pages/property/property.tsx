@@ -1,8 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+type PropertyType = {
+  children: JSX.Element;
+};
 
-function Property(): JSX.Element {
+function Property({ children }: PropertyType): JSX.Element {
   return (
     <div className="page">
+      {children}
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
