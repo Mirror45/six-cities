@@ -1,10 +1,12 @@
-type FavoritedType = {
-  children: JSX.Element;
-};
+import { Helmet } from 'react-helmet-async';
+import { ChildrenType } from '../../const';
 
-function Favorited({ children }: FavoritedType): JSX.Element {
+function Favorited({ children }: ChildrenType): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Favorited</title>
+      </Helmet>
       {children}
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

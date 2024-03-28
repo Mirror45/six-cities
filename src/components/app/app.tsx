@@ -1,16 +1,22 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, Cards } from '../../const';
+import { AppRoute, AuthorizationStatus, CardType, UserType } from '../../const';
 import Main from '../../pages/main/main';
 import Header from '../header/header';
 import Favorited from '../../pages/favorited/favorited';
 import Login from '../../pages/login/login';
 import Property from '../../pages/property/property';
 import SignIn from '../header/signin/signin';
+import SignOut from '../header/signout/signout';
 import PrivateRoute from '../private-route/private-route';
 import NotFound from '../../pages/not-found/not-found';
 
-function App(): JSX.Element {
+type AppType = {
+  card: CardType[];
+  user: UserType;
+};
+
+function App({ card, user }: AppType): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -18,7 +24,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Main}
             element={
-              <Main card={Cards}>
+              <Main card={card}>
                 <Header>
                   <SignIn />
                 </Header>
@@ -28,10 +34,10 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Favorited}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <Favorited>
                   <Header>
-                    <SignIn />
+                    <SignOut {...user} />
                   </Header>
                 </Favorited>
               </PrivateRoute>

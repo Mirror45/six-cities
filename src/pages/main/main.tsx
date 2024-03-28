@@ -1,14 +1,17 @@
 import Card from '../../components/card/card';
-import { CardType } from '../../const';
+import { CardType, ChildrenType } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 type MainType = {
   card: CardType[];
-  children: JSX.Element;
-};
+} & ChildrenType;
 
 function Main({ card, children }: MainType): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Six-cities</title>
+      </Helmet>
       {children}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

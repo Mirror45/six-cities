@@ -1,9 +1,12 @@
-/* eslint-disable react/no-unescaped-entities */
 import Header from '../header/header';
+import { Helmet } from 'react-helmet-async';
 
 function PropertyNotLogged(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Offer</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--property">
         <section className="property">
@@ -101,7 +104,7 @@ function PropertyNotLogged(): JSX.Element {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
-                <h2 className="property__inside-title">What's inside</h2>
+                <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   <li className="property__inside-item">Wi-Fi</li>
                   <li className="property__inside-item">Washing machine</li>

@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { AppRoute } from '../../const';
+import { AppRoute, ChildrenType } from '../../const';
 
-type NotFound = {
-  children: JSX.Element;
-};
-
-function NotFound({ children }: NotFound): JSX.Element {
+function NotFound({ children }: ChildrenType): JSX.Element {
   return (
     <section className="container">
       <Helmet>

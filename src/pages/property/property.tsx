@@ -1,11 +1,12 @@
-/* eslint-disable react/no-unescaped-entities */
-type PropertyType = {
-  children: JSX.Element;
-};
+import { Helmet } from 'react-helmet-async';
+import { ChildrenType } from '../../const';
 
-function Property({ children }: PropertyType): JSX.Element {
+function Property({ children }: ChildrenType): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Offer</title>
+      </Helmet>
       {children}
       <main className="page__main page__main--property">
         <section className="property">
@@ -103,7 +104,7 @@ function Property({ children }: PropertyType): JSX.Element {
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
-                <h2 className="property__inside-title">What's inside</h2>
+                <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   <li className="property__inside-item">Wi-Fi</li>
                   <li className="property__inside-item">Washing machine</li>

@@ -1,10 +1,12 @@
-type LoginType = {
-  children: JSX.Element;
-};
+import { Helmet } from 'react-helmet-async';
+import { ChildrenType } from '../../const';
 
-function Login({ children }: LoginType): JSX.Element {
+function Login({ children }: ChildrenType): JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       {children}
       <main className="page__main page__main--login">
         <div className="page__login-container container">
