@@ -1,4 +1,5 @@
 import Card from '../../components/card/card';
+import Map from '../../components/map/map';
 import { CardType, ChildrenType } from '../../const';
 import { Helmet } from 'react-helmet-async';
 
@@ -89,7 +90,7 @@ function Main({ card, children }: MainType): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map point={card.map(({ location }) => location)} />
             </div>
           </div>
         </div>
