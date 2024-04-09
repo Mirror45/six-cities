@@ -1,5 +1,10 @@
 import { CardType } from '../../const';
 import { Link } from 'react-router-dom';
+import { Dispatch, SetStateAction } from 'react';
+
+type activeType = {
+  active: Dispatch<SetStateAction<number | null>>;
+};
 
 function Card({
   type,
@@ -10,9 +15,13 @@ function Card({
   favorited,
   img,
   rating,
-}: CardType): JSX.Element {
+  active,
+}: CardType & activeType): JSX.Element {
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseOver={() => active(id)}
+    >
       {premium && (
         <div className="place-card__mark">
           <span>Premium</span>

@@ -27,6 +27,11 @@ export const User: UserType = {
   email: 'Oliver.conner@gmail.com',
 };
 
+export const Amsterdam: LocationType = {
+  latitude: 52.3740300,
+  longitude: 4.8896900,
+};
+
 export const Cards: CardType[] = [
   {
     id: 0,

@@ -1,13 +1,16 @@
 import Card from '../../components/card/card';
 import Map from '../../components/map/map';
-import { CardType, ChildrenType } from '../../const';
+import { CardType, ChildrenType, LocationType } from '../../const';
 import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
 
 type MainType = {
   card: CardType[];
+  city: LocationType;
 } & ChildrenType;
 
-function Main({ card, children }: MainType): JSX.Element {
+function Main({ card, children, city }: MainType): JSX.Element {
+  const [active, setActive] = useState<number | null>(null);
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -85,12 +88,12 @@ function Main({ card, children }: MainType): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {card.map((item) => (
-                  <Card key={item.id} {...item} />
+                  <Card key={item.id} {...item} active={setActive} />
                 ))}
               </div>
             </section>
             <div className="cities__right-section">
-              <Map point={card.map(({ location }) => location)} />
+              <Map points={card.map(({ id, location }) => ({ id, ...location }))} city={city} active={active} />
             </div>
           </div>
         </div>

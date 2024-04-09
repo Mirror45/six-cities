@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, CardType, UserType } from '../../const';
+import { AppRoute, AuthorizationStatus, CardType, UserType, LocationType } from '../../const';
 import Main from '../../pages/main/main';
 import Header from '../header/header';
 import Favorited from '../../pages/favorited/favorited';
@@ -14,9 +14,10 @@ import NotFound from '../../pages/not-found/not-found';
 type AppType = {
   card: CardType[];
   user: UserType;
+  city: LocationType;
 };
 
-function App({ card, user }: AppType): JSX.Element {
+function App({ card, user, city }: AppType): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -24,7 +25,7 @@ function App({ card, user }: AppType): JSX.Element {
           <Route
             path={AppRoute.Main}
             element={
-              <Main card={card}>
+              <Main card={card} city={city}>
                 <Header>
                   <SignIn />
                 </Header>
