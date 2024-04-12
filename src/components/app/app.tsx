@@ -55,7 +55,7 @@ function App({ card, user, city }: AppType): JSX.Element {
           <Route
             path={AppRoute.Room}
             element={
-              <Property>
+              <Property card={card.slice(0,3)} city={city}>
                 <Header>
                   <SignIn />
                 </Header>

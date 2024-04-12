@@ -23,17 +23,15 @@ const activeIcon = new Icon({
 
 function Map({ points, city, active }: MapType): JSX.Element {
   return (
-    <section className="cities__map map">
-      <MapContainer center={[city.latitude, city.longitude]} zoom={10} style={{ height: '500px' }}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {points.map(({ latitude, longitude, id }) => (
-          <Marker position={[latitude, longitude]} icon={id === active ? activeIcon : pointIcon} key={id}></Marker>
-        ))}
-      </MapContainer>
-    </section>
+    <MapContainer center={[city.latitude, city.longitude]} zoom={10} style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+      />
+      {points.map(({ latitude, longitude, id }) => (
+        <Marker position={[latitude, longitude]} icon={id === active ? activeIcon : pointIcon} key={id}></Marker>
+      ))}
+    </MapContainer>
   );
 }
 

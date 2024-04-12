@@ -93,7 +93,9 @@ function Main({ card, children, city }: MainType): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map points={card.map(({ id, location }) => ({ id, ...location }))} city={city} active={active} />
+              <section className="cities__map map">
+                <Map points={card.map(({ id, location }) => ({ id, ...location }))} city={city} active={active} />
+              </section>
             </div>
           </div>
         </div>

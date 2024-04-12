@@ -21,6 +21,7 @@ function Card({
     <article
       className="cities__place-card place-card"
       onMouseOver={() => active(id)}
+      onMouseOut={() => active(null)}
     >
       {premium && (
         <div className="place-card__mark">
