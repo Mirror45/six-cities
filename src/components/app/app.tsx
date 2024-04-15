@@ -1,23 +1,18 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, CardType, UserType, LocationType } from '../../const';
+import { AppRoute, AuthorizationStatus, CardType } from '../../const';
 import Main from '../../pages/main/main';
-import Header from '../header/header';
 import Favorited from '../../pages/favorited/favorited';
 import Login from '../../pages/login/login';
 import Property from '../../pages/property/property';
-import SignIn from '../header/signin/signin';
-import SignOut from '../header/signout/signout';
 import PrivateRoute from '../private-route/private-route';
 import NotFound from '../../pages/not-found/not-found';
 
 type AppType = {
   card: CardType[];
-  user: UserType;
-  city: LocationType;
 };
 
-function App({ card, user, city }: AppType): JSX.Element {
+function App({ card }: AppType): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,49 +20,33 @@ function App({ card, user, city }: AppType): JSX.Element {
           <Route
             path={AppRoute.Main}
             element={
-              <Main card={card} city={city}>
-                <Header>
-                  <SignIn />
-                </Header>
-              </Main>
+              <Main card={card}/>
             }
           />
           <Route
             path={AppRoute.Favorited}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorited>
-                  <Header>
-                    <SignOut {...user} />
-                  </Header>
-                </Favorited>
+                <Favorited/>
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.SignIn}
             element={
-              <Login>
-                <Header />
-              </Login>
+              <Login/>
             }
           />
           <Route
             path={AppRoute.Room}
             element={
-              <Property card={card.slice(0,3)} city={city}>
-                <Header>
-                  <SignIn />
-                </Header>
-              </Property>
+              <Property card={card.slice(0,3)}></Property>
             }
           />
           <Route
             path="*"
             element={
-              <NotFound>
-                <Header />
-              </NotFound>
+              <NotFound/>
             }
           />
         </Routes>

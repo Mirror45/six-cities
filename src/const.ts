@@ -1,4 +1,4 @@
-export type LocationType = {
+type LocationType = {
   latitude: number;
   longitude: number;
 };
@@ -13,23 +13,26 @@ export type CardType = {
   img: string;
   rating: number;
   location: LocationType;
+  city: {
+    location: LocationType;
+    name: string;
+  };
 };
 
 export type UserType = {
   email: string;
 };
 
-export type ChildrenType = {
-  children: JSX.Element;
-};
-
 export const User: UserType = {
   email: 'Oliver.conner@gmail.com',
 };
 
-export const Amsterdam: LocationType = {
-  latitude: 52.3740300,
-  longitude: 4.8896900,
+const Amsterdam: CardType['city'] = {
+  location: {
+    latitude: 52.3740300,
+    longitude: 4.8896900,
+  },
+  name: 'Amsterdam',
 };
 
 export const Cards: CardType[] = [
@@ -46,6 +49,7 @@ export const Cards: CardType[] = [
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
     },
+    city: Amsterdam
   },
   {
     id: 1,
@@ -60,6 +64,7 @@ export const Cards: CardType[] = [
       latitude: 52.369553943508,
       longitude: 4.85309666406198,
     },
+    city: Amsterdam
   },
   {
     id: 2,
@@ -74,6 +79,7 @@ export const Cards: CardType[] = [
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
     },
+    city: Amsterdam
   },
   {
     id: 3,
@@ -88,6 +94,7 @@ export const Cards: CardType[] = [
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
     },
+    city: Amsterdam
   },
 ];
 

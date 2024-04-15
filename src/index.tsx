@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { Cards, User, Amsterdam } from './const';
+import { Cards } from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <App card={Cards} user={User} city={Amsterdam} />
+    <App card={Cards} />
   </StrictMode>
 );

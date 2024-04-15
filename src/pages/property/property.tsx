@@ -1,22 +1,22 @@
 import Card from '../../components/card/card';
 import Map from '../../components/map/map';
+import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { ChildrenType, LocationType, CardType } from '../../const';
+import { CardType } from '../../const';
 import { useState } from 'react';
 
 type PropertyType = {
   card: CardType[];
-  city: LocationType;
-} & ChildrenType;
+}
 
-function Property({ children, card, city }: PropertyType): JSX.Element {
+function Property({ card }: PropertyType): JSX.Element {
   const [active, setActive] = useState<number | null>(null);
   return (
     <div className="page">
       <Helmet>
         <title>Offer</title>
       </Helmet>
-      {children}
+      <Header></Header>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -308,7 +308,7 @@ function Property({ children, card, city }: PropertyType): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map points={card.map(({ id, location }) => ({ id, ...location }))} city={city} active={active} />
+            <Map points={card} active={active} />
           </section>
         </section>
         <div className="container">

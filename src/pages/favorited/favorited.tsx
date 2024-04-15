@@ -1,13 +1,13 @@
+import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { ChildrenType } from '../../const';
 
-function Favorited({ children }: ChildrenType): JSX.Element {
+function Favorited(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Favorited</title>
       </Helmet>
-      {children}
+      <Header></Header>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

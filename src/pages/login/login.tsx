@@ -1,13 +1,13 @@
+import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { ChildrenType } from '../../const';
 
-function Login({ children }: ChildrenType): JSX.Element {
+function Login(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
         <title>Login</title>
       </Helmet>
-      {children}
+      <Header></Header>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
