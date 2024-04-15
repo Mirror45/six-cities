@@ -6,17 +6,7 @@ type activeType = {
   active: Dispatch<SetStateAction<number | null>>;
 };
 
-function Card({
-  type,
-  id,
-  premium,
-  title,
-  price,
-  favorited,
-  img,
-  rating,
-  active,
-}: CardType & activeType): JSX.Element {
+function Card({type, id, premium, title, price, favorited, img, rating, active,}: CardType & activeType): JSX.Element {
   return (
     <article
       className="cities__place-card place-card"
