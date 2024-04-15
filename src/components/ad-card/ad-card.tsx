@@ -1,10 +1,6 @@
 import { CardType } from '../../const';
 import { Link } from 'react-router-dom';
-import { Dispatch, SetStateAction } from 'react';
-
-type activeType = {
-  active: Dispatch<SetStateAction<number | null>>;
-};
+import { activeType } from '../../const';
 
 function Card({type, id, premium, title, price, favorited, img, rating, active,}: CardType & activeType): JSX.Element {
   return (

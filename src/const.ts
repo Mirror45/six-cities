@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 type LocationType = {
   latitude: number;
   longitude: number;
@@ -25,6 +27,10 @@ export type UserType = {
 
 export const User: UserType = {
   email: 'Oliver.conner@gmail.com',
+};
+
+export type activeType = {
+  active: Dispatch<SetStateAction<number | null>>;
 };
 
 const Amsterdam: CardType['city'] = {

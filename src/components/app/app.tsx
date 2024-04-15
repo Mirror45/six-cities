@@ -20,7 +20,7 @@ function App({ card }: AppType): JSX.Element {
           <Route
             path={AppRoute.Main}
             element={
-              <Main card={card}/>
+              <Main cards={card}/>
             }
           />
           <Route

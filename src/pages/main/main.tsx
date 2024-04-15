@@ -7,10 +7,10 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 
 type MainType = {
-  card: CardType[];
+  cards: CardType[];
 }
 
-function Main({ card }: MainType): JSX.Element {
+function Main({ cards }: MainType): JSX.Element {
   const [active, setActive] = useState<number | null>(null);
   return (
     <div className="page page--gray page--main">
@@ -27,10 +27,10 @@ function Main({ card }: MainType): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CitiesPlaces/>
+            <CitiesPlaces active={setActive} cards={cards}/>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map points={card} active={active} />
+                <Map points={cards} active={active} />
               </section>
             </div>
           </div>

@@ -1,9 +1,16 @@
 import AdCard from '../ad-card/ad-card';
+import { CardType } from '../../const';
+import { activeType } from '../../const';
 
-function AdCardList(): JSX.Element {
+type AdCardListProps = {
+  cards: CardType[];
+  active: any;
+}
+
+function AdCardList({active, cards}: AdCardListProps): JSX.Element {
   return (
     <>
-      {card.map((item) => (<AdCard key={item.id} {...item} active={setActive} />))}
+      {cards.map((item) => (<AdCard key={item.id} {...item} active={active} />))}
     </>
   );
 }
