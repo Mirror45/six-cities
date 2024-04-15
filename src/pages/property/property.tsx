@@ -1,4 +1,4 @@
-import Card from '../../components/card/card';
+import Card from '../../components/ad-card/ad-card';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { ChildrenType, LocationType, CardType } from '../../const';
