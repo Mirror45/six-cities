@@ -5,13 +5,16 @@ import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
 import CitiesPlaces from '../../components/cities-places/cities-places';
 import Map from '../../components/map/map';
+import { useAppSelector } from '../../hooks';
 
 type MainProps = {
   offers: Offer[];
 }
 
 function MainScreen({ offers }: MainProps): JSX.Element {
+
   const [active, setActive] = useState<number | null>(null);
+  const currentCity = useAppSelector((state)=>state.cityName);
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -22,7 +25,7 @@ function MainScreen({ offers }: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList/>
+            <LocationsList currentCity={currentCity}/>
           </section>
         </div>
         <div className="cities">
