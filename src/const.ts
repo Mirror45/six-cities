@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -25,6 +23,7 @@ export enum CitiesName {
 export enum Actions {
   PICK_CITY = 'PICK_CITY',
   FILTER_OFFERS = 'FILTER_OFFERS',
+  ACTIVE_MARKER_MAP = 'ACTIVE_MARKER_MAP',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;
@@ -40,8 +39,4 @@ export type UserType = {
 
 export const User: UserType = {
   email: 'Oliver.conner@gmail.com',
-};
-
-export type activeType = {
-  active: Dispatch<SetStateAction<number | null>>;
 };

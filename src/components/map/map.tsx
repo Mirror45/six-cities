@@ -3,10 +3,10 @@ import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { Offer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 type MapProps = {
   points: Offer[];
-  active: number | null;
 };
 
 const pointIcon = new Icon({
@@ -21,7 +21,8 @@ const activeIcon = new Icon({
   iconAnchor: [27, 39]
 });
 
-function Map({ points, active }: MapProps): JSX.Element {
+function Map({ points }: MapProps): JSX.Element {
+  const active = useAppSelector((state) => state.markerMap);
   const {latitude, longitude} = points[0].city.location;
   return (
     <MapContainer center={[latitude, longitude]} zoom={10} style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}>

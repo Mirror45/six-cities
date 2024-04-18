@@ -1,14 +1,6 @@
 import { Offer } from '../types/offer';
 
-const Amsterdam: Offer['city'] = {
-  location: {
-    latitude: 52.3740300,
-    longitude: 4.8896900,
-  },
-  name: 'Amsterdam',
-};
-
-export const offers = [
+export const offers: Offer[] = [
   {
     id: 0,
     type: 'Apartment',
@@ -22,7 +14,13 @@ export const offers = [
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
     },
-    city: Amsterdam
+    city: {
+      location: {
+        latitude: 52.3740300,
+        longitude: 4.8896900,
+      },
+      name: 'Amsterdam',
+    }
   },
   {
     id: 1,
@@ -37,7 +35,13 @@ export const offers = [
       latitude: 52.369553943508,
       longitude: 4.85309666406198,
     },
-    city: Amsterdam
+    city: {
+      location: {
+        latitude: 52.3740300,
+        longitude: 4.8896900,
+      },
+      name: 'Amsterdam',
+    }
   },
   {
     id: 2,
@@ -52,7 +56,13 @@ export const offers = [
       latitude: 52.3909553943508,
       longitude: 4.929309666406198,
     },
-    city: Amsterdam
+    city: {
+      location: {
+        latitude: 52.3740300,
+        longitude: 4.8896900,
+      },
+      name: 'Amsterdam',
+    }
   },
   {
     id: 3,
@@ -67,6 +77,12 @@ export const offers = [
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
     },
-    city: Amsterdam
+    city: {
+      location: {
+        latitude: 52.3740300,
+        longitude: 4.8896900,
+      },
+      name: 'Amsterdam',
+    }
   },
 ];
