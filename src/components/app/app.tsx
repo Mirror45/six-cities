@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -9,11 +9,10 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import PropertyScreen from '../../pages/property-screen/property-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
-type AppProps = {
-  offers: Offer[];
-};
 
-function App({ offers }: AppProps): JSX.Element {
+function App(): JSX.Element {
+  const offers = useAppSelector((state)=>state.offers);
+
   return (
     <HelmetProvider>
       <BrowserRouter>

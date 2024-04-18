@@ -19,7 +19,7 @@ export const offers: Offer[] = [
         latitude: 52.3740300,
         longitude: 4.8896900,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     }
   },
   {
@@ -40,7 +40,7 @@ export const offers: Offer[] = [
         latitude: 52.3740300,
         longitude: 4.8896900,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     }
   },
   {

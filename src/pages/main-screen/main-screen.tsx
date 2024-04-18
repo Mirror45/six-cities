@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
+import { useSort } from '../../hooks/useSort';
+import { SortingTypes } from '../../const';
 import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
 import CitiesPlaces from '../../components/cities-places/cities-places';
 import Map from '../../components/map/map';
-import { useAppSelector } from '../../hooks';
 
 type MainProps = {
   offers: Offer[];
@@ -12,6 +15,8 @@ type MainProps = {
 
 function MainScreen({ offers }: MainProps): JSX.Element {
   const currentCity = useAppSelector((state)=>state.cityName);
+  const [sortingType, setSortingType] = useState<string | null>(SortingTypes.Popular);
+  const sortedOffers = useSort(offers, sortingType);
 
   return (
     <div className="page page--gray page--main">
@@ -28,7 +33,7 @@ function MainScreen({ offers }: MainProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CitiesPlaces offers={offers}/>
+            <CitiesPlaces onSortingTypeClick={setSortingType} sortingType={sortingType} offers={sortedOffers} currentCity={currentCity}/>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map points={offers}/>
