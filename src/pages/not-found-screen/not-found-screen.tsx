@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AppRoute } from '../../const';
 
-function NotFound(): JSX.Element {
+function NotFoundScreen(): JSX.Element {
   return (
     <section className="container">
       <Helmet>
@@ -17,4 +17,4 @@ function NotFound(): JSX.Element {
     </section>
   );
 }
-export default NotFound;
+export default NotFoundScreen;

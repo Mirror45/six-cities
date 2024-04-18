@@ -1,9 +1,9 @@
-import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { Provider } from 'react-redux';
+import { offers } from './mocks/mocks';
+import { store } from './store/index';
 import App from './components/app/app';
-import { Cards } from './const';
-import { store } from './store';
-import {Provider} from 'react-redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <App card={Cards} />
+      <App offers={offers} />
     </Provider>
   </StrictMode>
 );

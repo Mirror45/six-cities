@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 
-function Login(): JSX.Element {
+function LoginScreen(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -54,4 +54,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default LoginScreen;

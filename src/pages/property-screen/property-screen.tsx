@@ -2,14 +2,14 @@ import Card from '../../components/ad-card/ad-card';
 import Map from '../../components/map/map';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { CardType } from '../../const';
+import { Offer } from '../../types/offer';
 import { useState } from 'react';
 
-type PropertyType = {
-  card: CardType[];
+type PropertyScreenProps = {
+  offers: Offer[];
 }
 
-function Property({ card }: PropertyType): JSX.Element {
+function PropertyScreen({ offers }: PropertyScreenProps): JSX.Element {
   const [active, setActive] = useState<number | null>(null);
   return (
     <div className="page">
@@ -308,7 +308,7 @@ function Property({ card }: PropertyType): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map points={card} active={active} />
+            <Map points={offers} active={active} />
           </section>
         </section>
         <div className="container">
@@ -317,8 +317,8 @@ function Property({ card }: PropertyType): JSX.Element {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {card.map((item) => (
-                <Card key={item.id} {...item} active={setActive} />
+              {offers.map((offer) => (
+                <Card key={offer.id} {...offer} active={setActive} />
               ))}
             </div>
           </section>
@@ -328,4 +328,4 @@ function Property({ card }: PropertyType): JSX.Element {
   );
 }
 
-export default Property;
+export default PropertyScreen;

@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { toogleCityAction } from '../../store/action';
+import { toogleCityAction } from '../../store/action/action';
 
 function LocationsList(): JSX.Element {
   const {city} = useAppSelector((state) => state);

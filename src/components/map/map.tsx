@@ -1,26 +1,27 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { CardType } from '../../const';
+import { Offer } from '../../types/offer';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
-type MapType = {
-  points: CardType[];
+type MapProps = {
+  points: Offer[];
   active: number | null;
 };
 
 const pointIcon = new Icon({
-  iconUrl: '/img/pin.svg',
+  iconUrl: URL_MARKER_DEFAULT,
   iconSize: [27, 39],
   iconAnchor: [27, 39]
 });
 
 const activeIcon = new Icon({
-  iconUrl: '/img/pin-active.svg',
+  iconUrl: URL_MARKER_CURRENT,
   iconSize: [27, 39],
   iconAnchor: [27, 39]
 });
 
-function Map({ points, active }: MapType): JSX.Element {
+function Map({ points, active }: MapProps): JSX.Element {
   const {latitude, longitude} = points[0].city.location;
   return (
     <MapContainer center={[latitude, longitude]} zoom={10} style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}>
