@@ -1,12 +1,17 @@
 import {useState} from 'react';
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
-import { activeType } from '../../const';
 import { getRatingStarsStyle} from '../../utils';
+import { useAppDispatch } from '../../hooks';
+import { activeMarkerMap } from '../../store/action/action';
 
 
-function Card({type, id, isPremium, title, price, isFavorite, img, rating, active,}: Offer & activeType): JSX.Element {
+function Card({type, id, isPremium, title, price, isFavorite, img, rating}: Offer): JSX.Element {
   const [Favorite, setFavorite] = useState(isFavorite);
+  const dispatch = useAppDispatch();
+
+  const handleMouseOver = () => dispatch(activeMarkerMap(id));
+  const handleMouseOut = () => dispatch(activeMarkerMap(null));
 
   const handleFavoriteButtonClick = () => {
     setFavorite((prevState) => !prevState);
@@ -15,8 +20,8 @@ function Card({type, id, isPremium, title, price, isFavorite, img, rating, activ
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => active(id)}
-      onMouseOut={() => active(null)}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       {
         <div className={`${isPremium ? 'place-card place-card__mark' : ''}`}>

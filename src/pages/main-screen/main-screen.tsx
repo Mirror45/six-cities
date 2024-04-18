@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
@@ -11,7 +10,6 @@ type MainProps = {
 }
 
 function MainScreen({ offers }: MainProps): JSX.Element {
-  const [active, setActive] = useState<number | null>(null);
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -27,10 +25,10 @@ function MainScreen({ offers }: MainProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CitiesPlaces offers={offers} active={setActive}/>
+            <CitiesPlaces offers={offers}/>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map points={offers} active={active}/>
+                <Map points={offers}/>
               </section>
             </div>
           </div>

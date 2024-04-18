@@ -6,3 +6,5 @@ export const pickCity = createAction(Actions.PICK_CITY, (textContent: string | n
 }));
 
 export const filterOffers = createAction(Actions.FILTER_OFFERS);
+
+export const activeMarkerMap = createAction(Actions.ACTIVE_MARKER_MAP, (id: number| null) => ({payload: id}));
