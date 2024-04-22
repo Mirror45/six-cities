@@ -30,7 +30,13 @@ export enum SortingTypes {
 export enum Actions {
   PICK_CITY = 'PICK_CITY',
   FILTER_OFFERS = 'FILTER_OFFERS',
+  LOAD_OFFERS = 'LOAD_OFFERS',
+  SET_STATUS_OFFERS_DATA_LOADING = 'SET_STATUS_OFFERS_DATA_LOADING',
   ACTIVE_MARKER_MAP = 'ACTIVE_MARKER_MAP',
+}
+
+export enum APIRoute {
+  Offers = '/hotels',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;

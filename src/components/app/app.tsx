@@ -8,10 +8,18 @@ import FavoritedScreen from '../../pages/favorited-screen/favorited-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import PropertyScreen from '../../pages/property-screen/property-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 function App(): JSX.Element {
-  const offers = useAppSelector((state)=>state.offers);
+  const offers = useAppSelector((state)=>state.filteredOffers);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <HelmetProvider>
