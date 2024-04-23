@@ -6,4 +6,7 @@ export type initialStateType = {
     markerMap: null | number;
     filteredOffers: Offer[];
     isOffersDataLoading: boolean;
+    authorizationStatus: string;
+    error: string | null;
+    userEmail: string;
 }

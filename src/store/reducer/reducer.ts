@@ -1,8 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
-// import { offers } from '../../mocks/mocks';
-import { CitiesName } from '../../const';
+import { CitiesName, AuthorizationStatus } from '../../const';
 import { initialStateType } from '../../types/initial-state';
-import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading } from '../action/action';
+import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail } from '../action/action';
 
 const initialState: initialStateType = {
   cityName: CitiesName.PARIS,
@@ -10,6 +9,9 @@ const initialState: initialStateType = {
   markerMap: null,
   filteredOffers: [],
   isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
+  userEmail: '',
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -28,5 +30,14 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoading, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(setUserEmail, (state, action) => {
+      state.userEmail = action.payload;
     });
 });

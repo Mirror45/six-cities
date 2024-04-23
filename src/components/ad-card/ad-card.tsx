@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../hooks';
 import { activeMarkerMap } from '../../store/action/action';
 
 
-function Card({type, id, isPremium, title, price, isFavorite, img, rating}: Offer): JSX.Element {
+function Card({type, id, isPremium, title, price, isFavorite, previewImage, rating}: Offer): JSX.Element {
   const [Favorite, setFavorite] = useState(isFavorite);
   const dispatch = useAppDispatch();
 
@@ -32,7 +32,7 @@ function Card({type, id, isPremium, title, price, isFavorite, img, rating}: Offe
         <a href="#">
           <img
             className="place-card__image"
-            src={img}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -63,7 +63,7 @@ function Card({type, id, isPremium, title, price, isFavorite, img, rating}: Offe
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={`/offers/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
