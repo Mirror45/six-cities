@@ -1,18 +1,26 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus, CardType } from '../../const';
-import Main from '../../pages/main/main';
-import Favorited from '../../pages/favorited/favorited';
-import Login from '../../pages/login/login';
-import Property from '../../pages/property/property';
+import { useAppSelector } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import NotFound from '../../pages/not-found/not-found';
+import MainScreen from '../../pages/main-screen/main-screen';
+import FavoritedScreen from '../../pages/favorited-screen/favorited-screen';
+import LoginScreen from '../../pages/login-screen/login-screen';
+import PropertyScreen from '../../pages/property-screen/property-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-type AppType = {
-  card: CardType[];
-};
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state)=>state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state)=>state.isOffersDataLoading);
+  const filterOffers = useAppSelector((state)=>state.filterOffers);
 
-function App({ card }: AppType): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -20,33 +28,33 @@ function App({ card }: AppType): JSX.Element {
           <Route
             path={AppRoute.Main}
             element={
-              <Main cards={card}/>
+              <MainScreen offers={filterOffers}/>
             }
           />
           <Route
             path={AppRoute.Favorited}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorited/>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <FavoritedScreen/>
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.SignIn}
             element={
-              <Login/>
+              <LoginScreen/>
             }
           />
           <Route
             path={AppRoute.Room}
             element={
-              <Property card={card.slice(0,3)}></Property>
+              <PropertyScreen/>
             }
           />
           <Route
             path="*"
             element={
-              <NotFound/>
+              <NotFoundScreen/>
             }
           />
         </Routes>

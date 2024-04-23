@@ -1,24 +1,38 @@
-import { CardType } from '../../const';
+import {useState} from 'react';
+import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
-import { activeType } from '../../const';
+import { getRatingStarsStyle} from '../../utils';
+import { useAppDispatch } from '../../hooks';
+import { activeMarkerMap } from '../../store/action/action';
 
-function Card({type, id, premium, title, price, favorited, img, rating, active,}: CardType & activeType): JSX.Element {
+
+function Card({type, id, isPremium, title, price, isFavorite, previewImage, rating}: Offer): JSX.Element {
+  const [Favorite, setFavorite] = useState(isFavorite);
+  const dispatch = useAppDispatch();
+
+  const handleMouseOver = () => dispatch(activeMarkerMap(id));
+  const handleMouseOut = () => dispatch(activeMarkerMap(null));
+
+  const handleFavoriteButtonClick = () => {
+    setFavorite((prevState) => !prevState);
+  };
+
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => active(id)}
-      onMouseOut={() => active(null)}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
-      {premium && (
-        <div className="place-card__mark">
-          <span>Premium</span>
+      {
+        <div className={`${isPremium ? 'place-card place-card__mark' : ''}`}>
+          <span>{isPremium ? 'Premium' : ''}</span>
         </div>
-      )}
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
             className="place-card__image"
-            src={img}
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
@@ -32,9 +46,8 @@ function Card({type, id, premium, title, price, favorited, img, rating, active,}
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button${
-              favorited ? ' place-card__bookmark-button--active' : ''
-            }`}
+            className={`place-card__bookmark-button ${Favorite ? 'place-card__bookmark-button--active' : ''} button`}
+            onClick={handleFavoriteButtonClick}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width={18} height={19}>
@@ -45,7 +58,7 @@ function Card({type, id, premium, title, price, favorited, img, rating, active,}
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 20}%` }} />
+            <span style={{width:  getRatingStarsStyle(rating)}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

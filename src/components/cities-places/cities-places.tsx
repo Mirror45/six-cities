@@ -1,20 +1,22 @@
 import Sort from '../sort/sort';
 import AdCardList from '../ad-card-list/ad-card-list';
-import { CardType } from '../../const';
+import { Offer } from '../../types/offer';
 
-type CitiesProp = {
-  cards: CardType[];
-  active: any;
+type CitiesPlacesProps = {
+  offers: Offer[];
+  sortingType: string | null;
+  onSortingTypeClick(value: string | null): void;
+  currentCity: string | null;
 }
 
-function CitiesPlaces({active, cards}: CitiesProp): JSX.Element {
+function CitiesPlaces({ offers, onSortingTypeClick, sortingType, currentCity}: CitiesPlacesProps): JSX.Element {
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">312 places to stay in Amsterdam</b>
-      <Sort/>
+      <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+      <Sort onSortingTypeClick={onSortingTypeClick} sortingType={sortingType}/>
       <div className="cities__places-list places__list tabs__content">
-        <AdCardList active={active} cards={cards}/>
+        <AdCardList offers={offers}/>
       </div>
     </section>
   );
