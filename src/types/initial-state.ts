@@ -2,7 +2,8 @@ import { Offer } from './offer';
 import { Review } from './review';
 
 export type initialStateType = {
-    cityName: string | null;
+    cityName: string;
+    sortType: string;
     offers: Offer[];
     markerMap: null | number;
     filteredOffers: Offer[];
@@ -15,6 +16,7 @@ export type initialStateType = {
       comments: Review[];
       nearbyOffers: Offer[];
       isCommentDataSending: boolean;
+      currentOfferId: number | null;
     };
     isCurrentOfferDataLoading: boolean;
 }

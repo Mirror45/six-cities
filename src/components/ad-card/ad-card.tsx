@@ -6,8 +6,12 @@ import { useAppDispatch } from '../../hooks';
 import { activeMarkerMap } from '../../store/action/action';
 import { offerInfoInitAction } from '../../store/action/api-actions';
 
+type AdCardProps = {
+  offer: Offer;
+}
 
-function Card({type, id, isPremium, title, price, isFavorite, previewImage, rating}: Offer): JSX.Element {
+function AdCard({offer}: AdCardProps): JSX.Element {
+  const {type, id, isPremium, title, price, isFavorite, previewImage, rating} = offer;
   const [Favorite, setFavorite] = useState(isFavorite);
   const dispatch = useAppDispatch();
 
@@ -77,4 +81,4 @@ function Card({type, id, isPremium, title, price, isFavorite, previewImage, rati
   );
 }
 
-export default Card;
+export default AdCard;

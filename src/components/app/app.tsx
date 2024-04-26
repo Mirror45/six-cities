@@ -14,13 +14,9 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 function App(): JSX.Element {
-  const offers = useAppSelector((state)=>state.filteredOffers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offerComments = useAppSelector((state) => state.currentOffer.comments);
-  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
-  const offerInfo = useAppSelector((state) => state.currentOffer.offerInfo);
-  // const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
+
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
@@ -34,7 +30,7 @@ function App(): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offers={offers}/>}
+            element={<MainScreen/>}
           />
           <Route
             path={AppRoute.Favorited}
@@ -50,7 +46,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element = {<PropertyScreen offers={offerInfo} reviews={offerComments} nearbyOffers={nearbyOffers}/>}
+            element = {<PropertyScreen/>}
           />
           <Route
             path="*"

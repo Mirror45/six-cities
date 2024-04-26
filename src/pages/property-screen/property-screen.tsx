@@ -1,9 +1,6 @@
-import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import { useState } from 'react';
-import { Review } from '../../types/review';
 import { getRatingStarsStyle} from '../../utils';
 import Map from '../../components/map/map';
 import Header from '../../components/header/header';
@@ -12,20 +9,16 @@ import AdCardList from '../../components/ad-card-list/ad-card-list';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import PropertyReviewForm from '../../components/property-review-form/property-review-form';
 
-type PropertyScreenProps = {
-  offers: Offer | null;
-  reviews: Review[];
-  nearbyOffers: Offer[];
-}
 
-function PropertyScreen({offers, reviews, nearbyOffers}: PropertyScreenProps): JSX.Element {
-  const {id} = useParams();
+function PropertyScreen(): JSX.Element {
+  const offer = useAppSelector((state) => state.currentOffer.offerInfo);
+  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
   const [active, setActive] = useState<number | null>(null);
   const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (offers && !isCurrenOfferDataLoading) {
-    const {isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms} = offers;
+  if (offer && !isCurrenOfferDataLoading) {
+    const {isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms} = offer;
 
     return (
       <div className="page">
@@ -114,16 +107,16 @@ function PropertyScreen({offers, reviews, nearbyOffers}: PropertyScreenProps): J
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <PropertyReviews reviews={reviews}/>
+                  <PropertyReviews/>
                   {
                     authorizationStatus === 'AUTH' &&
-                    <PropertyReviewForm id={offers.id.toString()}/>
+                    <PropertyReviewForm id={offer.id.toString()}/>
                   }
                 </section>
               </div>
             </div>
             <section className="property__map map">
-              <Map points={offers} active={active} />
+              <Map points={offer} active={active} />
             </section>
           </section>
           <div className="container">
@@ -138,7 +131,7 @@ function PropertyScreen({offers, reviews, nearbyOffers}: PropertyScreenProps): J
       </div>
     );
   }
-  console.log(reviews);
+
   return <NotFoundScreen />;
 }
 

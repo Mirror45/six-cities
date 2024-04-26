@@ -1,10 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { CitiesName, AuthorizationStatus } from '../../const';
+import { CitiesName, AuthorizationStatus, SortingTypes } from '../../const';
 import { initialStateType } from '../../types/initial-state';
-import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading } from '../action/action';
+import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading, setSortType, setCurrentOfferId } from '../action/action';
 
 const initialState: initialStateType = {
   cityName: CitiesName.PARIS,
+  sortType: SortingTypes.Popular,
   offers: [],
   markerMap: null,
   filteredOffers: [],
@@ -17,6 +18,7 @@ const initialState: initialStateType = {
     comments: [],
     nearbyOffers: [],
     isCommentDataSending: false,
+    currentOfferId: null,
   },
   isCurrentOfferDataLoading: false,
 };
@@ -25,6 +27,9 @@ export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(pickCity, (state, action) => {
       state.cityName = action.payload;
+    })
+    .addCase(setSortType, (state, action) => {
+      state.sortType = action.payload;
     })
     .addCase(filterOffers, (state) => {
       state.filteredOffers = state.offers.filter((offer)=> offer.city.name === state.cityName);
@@ -61,5 +66,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCommentDataSending, (state, action) => {
       state.currentOffer.isCommentDataSending = action.payload;
+    })
+    .addCase(setCurrentOfferId, (state, action) => {
+      state.currentOffer.currentOfferId = action.payload;
     });
 });

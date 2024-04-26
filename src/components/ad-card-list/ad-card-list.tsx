@@ -9,7 +9,7 @@ function AdCardList({ offers}: AdCardListProps): JSX.Element {
 
   return (
     <>
-      {offers.map((offer) => (<AdCard key={offer.id} {...offer} />))}
+      {offers.map((offer) => (<AdCard key={offer.id} offer={offer} />))}
     </>
   );
 }
