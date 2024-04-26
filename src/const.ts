@@ -2,7 +2,9 @@ export enum AppRoute {
   Main = '/',
   SignIn = '/login',
   Favorited = '/favorited',
-  Room = '/offers/:id?',
+  Room = '/offers',
+  Comment = '/comments/',
+  NearbyOffers = '/nearby',
 }
 
 export enum AuthorizationStatus {
@@ -37,12 +39,19 @@ export enum Actions {
   ACTIVE_MARKER_MAP = 'ACTIVE_MARKER_MAP',
   SET_USER_EMAIL = 'SET_USER_EMAIL',
   REDIRECT_ROUTE = 'REDIRECT_ROUTE',
+  LOAD_OFFER_INFO = 'LOAD_OFFER_INFO',
+  LOAD_NEARBY_OFFERS = 'LOAD_NEARBY_OFFERS',
+  LOAD_OFFER_COMMENTS = 'LOAD_OFFER_COMMENTS',
+  SET_CURRENT_OFFER_DATA_LOADING = 'SET_CURRENT_OFFER_DATA_LOADING',
+  SET_COMMENT_DATA_SENDING = 'SET_COMMENT_DATA_SENDING',
 }
 
 export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Comment = '/comments/',
+  NearbyOffers = '/nearby',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;

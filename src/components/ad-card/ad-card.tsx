@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getRatingStarsStyle} from '../../utils';
 import { useAppDispatch } from '../../hooks';
 import { activeMarkerMap } from '../../store/action/action';
+import { offerInfoInitAction } from '../../store/action/api-actions';
 
 
 function Card({type, id, isPremium, title, price, isFavorite, previewImage, rating}: Offer): JSX.Element {
@@ -58,12 +59,17 @@ function Card({type, id, isPremium, title, price, isFavorite, previewImage, rati
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width:  getRatingStarsStyle(rating)}} />
+            <span style={{width: getRatingStarsStyle(rating)}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offers/${id}`}>{title}</Link>
+          <Link to={`/offers/${id}`} onClick={() => {
+            dispatch(offerInfoInitAction(id.toString()));
+          }}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

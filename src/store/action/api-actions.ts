@@ -1,8 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
+import { CommentData } from '../../types/comment-data';
 import { AppDispatch, State } from '../../types/state';
-import { filterOffers, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, redirectToRoute } from './action';
+import { filterOffers, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, redirectToRoute, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../../const';
 import { saveToken, dropToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
@@ -77,3 +79,46 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
+
+export const offerInfoInitAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offerInfoInit',
+  async(id, {dispatch, extra: api}) => {
+    dispatch(setCurrentOfferDataLoading(true));
+    const {data: offerData} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+    const {data: nearbyOffersData} = await api.get<Offer[]>(`${APIRoute.Offers}/${id}${APIRoute.NearbyOffers}`);
+    const {data: commentsData} = await api.get<Review[]>(`${APIRoute.Comment}/${id}`);
+    dispatch(setCurrentOfferDataLoading(false));
+    dispatch(loadOfferInfo(offerData));
+    dispatch(loadNearbyOffers(nearbyOffersData));
+    dispatch(loadOfferComments(commentsData));
+  },
+);
+
+
+export const sendOfferCommentAction = createAsyncThunk<void, {
+  id: string;
+  commentData: CommentData;
+  resetFormData: () => void;
+    },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'sendOfferComment',
+    async({id, resetFormData, commentData}, {dispatch, extra: api}) => {
+      try{
+        dispatch(setCommentDataSending(true));
+        const {data} = await api.post<Review[]>(APIRoute.Comment + id, commentData);
+        dispatch(setCommentDataSending(false));
+        dispatch(loadOfferComments(data));
+        resetFormData();
+      } catch {
+        dispatch(setCommentDataSending(false));
+      }
+    }
+    );

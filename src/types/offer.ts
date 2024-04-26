@@ -1,22 +1,40 @@
-type LocationType = {
-  latitude: number;
-  longitude: number;
-};
+// type LocationType = {
+//   latitude: number;
+//   longitude: number;
+// };
 
 export type Offer = {
+  bedrooms: number;
   city: {
-    location: LocationType;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+      };
     name: string;
   };
-  title: string;
+  description: string;
+  goods: string[];
+  host: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
   id: number;
-  type: string;
-  isPremium: boolean;
+  images: string[];
   isFavorite: boolean;
-  price: number;
+  isPremium: boolean;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  maxAdults: number;
   previewImage: string;
+  price: number;
   rating: number;
-  location: LocationType;
-};
-
+  title: string;
+  type: string;
+}
 

@@ -17,6 +17,10 @@ function App(): JSX.Element {
   const offers = useAppSelector((state)=>state.filteredOffers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offerComments = useAppSelector((state) => state.currentOffer.comments);
+  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
+  const offerInfo = useAppSelector((state) => state.currentOffer.offerInfo);
+  // const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
@@ -30,9 +34,7 @@ function App(): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={
-              <MainScreen offers={offers}/>
-            }
+            element={<MainScreen offers={offers}/>}
           />
           <Route
             path={AppRoute.Favorited}
@@ -44,21 +46,15 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.SignIn}
-            element={
-              <LoginScreen/>
-            }
+            element={<LoginScreen/>}
           />
           <Route
             path={AppRoute.Room}
-            element={
-              <PropertyScreen offers={offers.slice(0,3)}></PropertyScreen>
-            }
+            element = {<PropertyScreen offers={offerInfo} reviews={offerComments} nearbyOffers={nearbyOffers}/>}
           />
           <Route
             path="*"
-            element={
-              <NotFoundScreen/>
-            }
+            element={<NotFoundScreen/>}
           />
         </Routes>
       </HistoryRouter>
