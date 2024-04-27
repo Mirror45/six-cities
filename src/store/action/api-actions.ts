@@ -4,22 +4,12 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 import { CommentData } from '../../types/comment-data';
 import { AppDispatch, State } from '../../types/state';
-import { filterOffers, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, redirectToRoute, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading } from './action';
-import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../../const';
+import { filterOffers, loadOffers, setOffersDataLoading, requireAuthorization, setUserEmail, redirectToRoute, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading } from './action';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../../const';
 import { saveToken, dropToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import { UserData } from '../../types/user-data';
-import { store } from '..';
 
-export const clearErrorAction = createAsyncThunk(
-  'hotel/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

@@ -9,7 +9,6 @@ export type initialStateType = {
     filteredOffers: Offer[];
     isOffersDataLoading: boolean;
     authorizationStatus: string;
-    error: string | null;
     userEmail: string;
     currentOffer: {
       offerInfo: Offer | null;

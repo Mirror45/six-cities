@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { CitiesName, AuthorizationStatus, SortingTypes } from '../../const';
 import { initialStateType } from '../../types/initial-state';
-import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading, requireAuthorization, setError, setUserEmail, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading, setSortType, setCurrentOfferId } from '../action/action';
+import { pickCity, filterOffers, activeMarkerMap, loadOffers, setOffersDataLoading, requireAuthorization, setUserEmail, loadNearbyOffers, loadOfferComments, loadOfferInfo, setCommentDataSending, setCurrentOfferDataLoading, setSortType, setCurrentOfferId } from '../action/action';
 
 const initialState: initialStateType = {
   cityName: CitiesName.PARIS,
@@ -11,7 +11,6 @@ const initialState: initialStateType = {
   filteredOffers: [],
   isOffersDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
   userEmail: '',
   currentOffer: {
     offerInfo: null,
@@ -45,9 +44,6 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     })
     .addCase(setUserEmail, (state, action) => {
       state.userEmail = action.payload;
