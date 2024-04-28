@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CitiesName } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { pickCity, filterOffers } from '../../store/action/action';
+import { pickCity } from '../../store/action/action';
 
 type LocationsListProps = {
   currentCity: string | null;
@@ -17,7 +17,6 @@ function LocationsList({currentCity}: LocationsListProps): JSX.Element {
         return;
       }
       dispatch(pickCity(target.textContent));
-      dispatch(filterOffers());
     }}
     >
       <li className="locations__item">

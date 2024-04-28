@@ -8,13 +8,14 @@ import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
 import CitiesPlaces from '../../components/cities-places/cities-places';
 import Map from '../../components/map/map';
+import { getCity } from '../../store/reducer/data/selector';
 
 type MainProps = {
   offers: Offer[];
 }
 
 function MainScreen({ offers }: MainProps): JSX.Element {
-  const currentCity = useAppSelector((state)=>state.cityName);
+  const currentCity = useAppSelector(getCity);
   const [sortingType, setSortingType] = useState<string | null>(SortingTypes.Popular);
   const sortedOffers = useSort(offers, sortingType);
 

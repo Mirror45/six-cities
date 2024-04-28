@@ -1,8 +1,16 @@
-type HeaderType = {
-  children?: JSX.Element;
-};
+import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../const';
+import SignIn from './signin/signin';
+import SignOut from './signout/signout';
+import { AppRoute } from '../../const';
+import { User } from '../../const';
+import { getAuthorizationStatus } from '../../store/reducer/user/selector';
 
-function Header({ children }: HeaderType): JSX.Element {
+function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const {email} = User;
+  const chield = authorizationStatus === AuthorizationStatus.Auth ? <SignOut email={email}/> : <SignIn/>;
+
   return (
     <header className="header">
       <div className="container">
@@ -18,7 +26,7 @@ function Header({ children }: HeaderType): JSX.Element {
               />
             </a>
           </div>
-          {children}
+          {document.location.pathname === AppRoute.SignIn ? null : chield}
         </div>
       </div>
     </header>
