@@ -5,6 +5,7 @@ import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
 import CitiesPlaces from '../../components/cities-places/cities-places';
 import Map from '../../components/map/map';
+import { MainEmpty } from '../../components/main-empty/main-empty';
 
 
 function MainScreen(): JSX.Element {
@@ -24,14 +25,15 @@ function MainScreen(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <CitiesPlaces offers={offers}/>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map points={offers}/>
-              </section>
-            </div>
-          </div>
+          {!offers.length ? <MainEmpty /> :
+            <div className="cities__places-container container">
+              <CitiesPlaces offers={offers}/>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map points={offers}/>
+                </section>
+              </div>
+            </div>}
         </div>
       </main>
     </div>
