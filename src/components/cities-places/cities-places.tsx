@@ -4,14 +4,16 @@ import { Offer } from '../../types/offer';
 import { sortOffers } from '../../utils';
 import Sort from '../sort/sort';
 import AdCardList from '../ad-card-list/ad-card-list';
+import { getCityName } from '../../store/reducer/offers-data/selectors';
+import { getSortType } from '../../store/reducer/page-events/selectors';
 
 type CitiesPlacesProps = {
   offers: Offer[];
 }
 
 function CitiesPlaces({ offers}: CitiesPlacesProps): JSX.Element {
-  const currentCity = useAppSelector((state)=>state.cityName);
-  const sortType = useAppSelector((state) => state.sortType);
+  const currentCity = useAppSelector(getCityName);
+  const sortType = useAppSelector(getSortType);
   const sortedOffers = useMemo(() => sortOffers(offers, sortType), [offers, sortType]);
 
   return (

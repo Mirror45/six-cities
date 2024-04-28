@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { SortingTypes } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSortType } from '../../store/action/action';
+import { setSortType } from '../../store/reducer/page-events/page-events';
+import { getSortType } from '../../store/reducer/page-events/selectors';
 
 
 function Sort(): JSX.Element {
   const [sortingOptionsOpened, setSortingOptionsOpened] = useState(false);
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
 
   return (

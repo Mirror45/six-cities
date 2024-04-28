@@ -1,14 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/action/api-actions';
+import { getAuthorizationStatus, getUserEmail } from '../../store/reducer/authorization-user-process/selectors';
 
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.userEmail);
 
   return (
     <header className="header">
@@ -56,4 +56,4 @@ function Header(): JSX.Element {
   );
 }
 
-export default React.memo(Header);
+export default Header;

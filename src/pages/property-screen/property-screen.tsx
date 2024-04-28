@@ -1,7 +1,9 @@
-import { useAppSelector } from '../../hooks';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { getRatingStarsStyle} from '../../utils';
+import { useAppSelector } from '../../hooks';
+import { getCurrentOfferDataLoadingStatus, getNearbyOffers, getOfferInfo } from '../../store/reducer/current-offer-data/selectors';
+import { getAuthorizationStatus } from '../../store/reducer/authorization-user-process/selectors';
 import Map from '../../components/map/map';
 import Header from '../../components/header/header';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
@@ -11,11 +13,11 @@ import PropertyReviewForm from '../../components/property-review-form/property-r
 
 
 function PropertyScreen(): JSX.Element {
-  const offer = useAppSelector((state) => state.currentOffer.offerInfo);
-  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
   const [active, setActive] = useState<number | null>(null);
-  const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offer = useAppSelector(getOfferInfo);
+  const isCurrenOfferDataLoading = useAppSelector(getCurrentOfferDataLoadingStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
 
   if (offer && !isCurrenOfferDataLoading) {
     const {isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms} = offer;

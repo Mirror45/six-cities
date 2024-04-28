@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
+import { getFilteredOffers } from '../../store/reducer/offers-data/selectors';
 import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/location.list';
 import CitiesPlaces from '../../components/cities-places/cities-places';
@@ -7,7 +8,7 @@ import Map from '../../components/map/map';
 
 
 function MainScreen(): JSX.Element {
-  const offers = useAppSelector((state)=>state.filteredOffers);
+  const offers = useAppSelector(getFilteredOffers);
 
   return (
     <div className="page page--gray page--main">

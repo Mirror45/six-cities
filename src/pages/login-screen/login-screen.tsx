@@ -2,6 +2,7 @@ import {useRef, FormEvent} from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
+import { getCityName } from '../../store/reducer/offers-data/selectors';
 import { loginAction } from '../../store/action/api-actions';
 import { AuthData } from '../../types/auth-data';
 import Header from '../../components/header/header';
@@ -11,7 +12,7 @@ function LoginScreen(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.cityName);
+  const currentCity = useAppSelector(getCityName);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));

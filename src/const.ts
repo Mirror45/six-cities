@@ -55,6 +55,14 @@ export enum APIRoute {
   NearbyOffers = '/nearby',
 }
 
+export enum SlicesName {
+  Page = 'PAGE',
+  User = 'USER',
+  OffersData = 'OFFERS_DATA',
+  CurrentOfferData = 'CURRENT_OFFER_DATA',
+  UserReview = 'USER_REVIEW',
+}
+
 export const RATING_STARS_STYLE_KOEF = 20;
 
 export const URL_MARKER_DEFAULT = 'img/pin.svg';

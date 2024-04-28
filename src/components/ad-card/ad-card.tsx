@@ -3,8 +3,8 @@ import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { getRatingStarsStyle} from '../../utils';
 import { useAppDispatch } from '../../hooks';
-import { activeMarkerMap } from '../../store/action/action';
-import { offerInfoInitAction } from '../../store/action/api-actions';
+// import { activeMarkerMap } from '../../store/action/action';
+import { fetchOfferInfoAction } from '../../store/action/api-actions';
 
 type AdCardProps = {
   offer: Offer;
@@ -15,8 +15,8 @@ function AdCard({offer}: AdCardProps): JSX.Element {
   const [Favorite, setFavorite] = useState(isFavorite);
   const dispatch = useAppDispatch();
 
-  const handleMouseOver = () => dispatch(activeMarkerMap(id));
-  const handleMouseOut = () => dispatch(activeMarkerMap(null));
+  // const handleMouseOver = () => dispatch(activeMarkerMap(id));
+  // const handleMouseOut = () => dispatch(activeMarkerMap(null));
 
   const handleFavoriteButtonClick = () => {
     setFavorite((prevState) => !prevState);
@@ -25,8 +25,8 @@ function AdCard({offer}: AdCardProps): JSX.Element {
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
+      // onMouseOver={handleMouseOver}
+      // onMouseOut={handleMouseOut}
     >
       {
         <div className={`${isPremium ? 'place-card place-card__mark' : ''}`}>
@@ -69,7 +69,7 @@ function AdCard({offer}: AdCardProps): JSX.Element {
         </div>
         <h2 className="place-card__name">
           <Link to={`/offers/${id}`} onClick={() => {
-            dispatch(offerInfoInitAction(id.toString()));
+            dispatch(fetchOfferInfoAction(id.toString()));
           }}
           >
             {title}

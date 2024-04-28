@@ -1,10 +1,11 @@
 import FavoriteAdCard from '../favorite-ad-card/favorite-ad-card';
 import { CitiesName } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getFilteredOffers } from '../../store/reducer/offers-data/selectors';
 
 
 export default function FavoriteAdCardList(): JSX.Element {
-  const offers = useAppSelector((state)=>state.filteredOffers);
+  const offers = useAppSelector(getFilteredOffers);
 
   return (
     <li className="favorites__locations-items">
