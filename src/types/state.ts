@@ -14,6 +14,11 @@ export type OffersData = {
   cityName: string;
 }
 
+export type FavoriteOffersData = {
+  isFavoriteOffersDataLoading: boolean;
+  favoriteOffers: Offer[];
+}
+
 export type PageEvents = {
    currentOfferId: number | null;
    sortType: string;

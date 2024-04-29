@@ -51,14 +51,16 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
-  Comment = '/comments/',
+  Comment = '/comments',
   NearbyOffers = '/nearby',
+  FavoriteOffers = '/favorite/',
 }
 
 export enum SlicesName {
   Page = 'PAGE',
   User = 'USER',
   OffersData = 'OFFERS_DATA',
+  FavoriteOffersData = 'FAVORITE_OFFERS_DATA',
   CurrentOfferData = 'CURRENT_OFFER_DATA',
   UserReview = 'USER_REVIEW',
 }

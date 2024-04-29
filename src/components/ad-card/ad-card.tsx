@@ -1,10 +1,13 @@
-import {useState} from 'react';
-import { Offer } from '../../types/offer';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Offer } from '../../types/offer';
+import { AppRoute } from '../../const';
 import { getRatingStarsStyle} from '../../utils';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 // import { activeMarkerMap } from '../../store/action/action';
-import { fetchOfferInfoAction } from '../../store/action/api-actions';
+import { fetchOfferInfoAction, setOfferFavoriteStatusAction } from '../../store/action/api-actions';
+import browserHistory from '../../browser-history';
+import { getAuthorizationStatus } from '../../store/reducer/authorization-user-process/selectors';
 
 type AdCardProps = {
   offer: Offer;
@@ -12,15 +15,23 @@ type AdCardProps = {
 
 function AdCard({offer}: AdCardProps): JSX.Element {
   const {type, id, isPremium, title, price, isFavorite, previewImage, rating} = offer;
-  const [Favorite, setFavorite] = useState(isFavorite);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const [isFavoriteOffer, setFavoriteOffer] = useState<boolean>(isFavorite);
+  const favoriteStatus = `${+!isFavoriteOffer}`;
   const dispatch = useAppDispatch();
+
+  const handleFavoriteButtonClick = () => {
+    if(authorizationStatus !== 'AUTH') {
+      browserHistory.push(AppRoute.SignIn);
+
+      return;
+    }
+    setFavoriteOffer((prevState) => !prevState);
+    dispatch(setOfferFavoriteStatusAction({id, favoriteStatus}));
+  };
 
   // const handleMouseOver = () => dispatch(activeMarkerMap(id));
   // const handleMouseOut = () => dispatch(activeMarkerMap(null));
-
-  const handleFavoriteButtonClick = () => {
-    setFavorite((prevState) => !prevState);
-  };
 
   return (
     <article
@@ -34,7 +45,7 @@ function AdCard({offer}: AdCardProps): JSX.Element {
         </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to="#">
           <img
             className="place-card__image"
             src={previewImage}
@@ -42,7 +53,7 @@ function AdCard({offer}: AdCardProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -51,7 +62,7 @@ function AdCard({offer}: AdCardProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${Favorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${isFavoriteOffer ? 'place-card__bookmark-button--active' : ''} button`}
             onClick={handleFavoriteButtonClick}
             type="button"
           >
@@ -68,7 +79,7 @@ function AdCard({offer}: AdCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offers/${id}`} onClick={() => {
+          <Link to={`/offer/${offer.id}`} onClick={() => {
             dispatch(fetchOfferInfoAction(id.toString()));
           }}
           >

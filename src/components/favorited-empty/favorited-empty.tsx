@@ -1,8 +1,8 @@
 import Header from '../header/header';
 import { Helmet } from 'react-helmet-async';
-import { Footer } from '../footer/footer';
+import Footer from '../footer/footer';
 
-function FavoritedEmpty(): JSX.Element {
+export default function FavoritedEmpty(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
       <Helmet>
@@ -24,5 +24,3 @@ function FavoritedEmpty(): JSX.Element {
     </div>
   );
 }
-
-export default FavoritedEmpty;

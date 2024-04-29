@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/action/api-actions';
+import { logoutAction, fetchFavoriteOffersAction } from '../../store/action/api-actions';
 import { getAuthorizationStatus, getUserEmail } from '../../store/reducer/authorization-user-process/selectors';
+import { getFavoriteOffers } from '../../store/reducer/favorite-offers-data/selectors';
+import { memo } from 'react';
 
 
-function Header(): JSX.Element {
+function MainHeader(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (
     <header className="header">
@@ -23,11 +26,14 @@ function Header(): JSX.Element {
             {authorizationStatus === AuthorizationStatus.Auth &&
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to="/favorites">
+                  <Link className="header__nav-link header__nav-link--profile" onClick={() => {
+                    dispatch(fetchFavoriteOffersAction());
+                  }} to="/favorites"
+                  >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{userEmail}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favoriteOffers.length}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">
@@ -55,5 +61,7 @@ function Header(): JSX.Element {
     </header>
   );
 }
+
+const Header = memo(MainHeader);
 
 export default Header;
