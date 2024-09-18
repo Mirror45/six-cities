@@ -5,6 +5,7 @@ import { Review } from './review';
 export type AuthorizationUserProcess = {
   authorizationStatus: string;
   userEmail: string;
+  markerMap: number|null;
 }
 
 export type OffersData = {

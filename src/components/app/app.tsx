@@ -47,7 +47,9 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element = {<PropertyScreen/>}
+            element={
+              <PropertyScreen/>
+            }
           />
           <Route
             path="*"

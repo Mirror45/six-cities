@@ -4,7 +4,7 @@ import { Offer } from '../../types/offer';
 import { AppRoute } from '../../const';
 import { getRatingStarsStyle} from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-// import { activeMarkerMap } from '../../store/action/action';
+import { activeMarkerMap } from '../../store/action/action';
 import { fetchOfferInfoAction, setOfferFavoriteStatusAction } from '../../store/action/api-actions';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus } from '../../store/reducer/authorization-user-process/selectors';
@@ -20,6 +20,9 @@ function AdCard({offer}: AdCardProps): JSX.Element {
   const favoriteStatus = `${+!isFavoriteOffer}`;
   const dispatch = useAppDispatch();
 
+  const handleMouseOver = () => dispatch(activeMarkerMap(id));
+  const handleMouseOut = () => dispatch(activeMarkerMap(null));
+
   const handleFavoriteButtonClick = () => {
     if(authorizationStatus !== 'AUTH') {
       browserHistory.push(AppRoute.SignIn);
@@ -30,14 +33,11 @@ function AdCard({offer}: AdCardProps): JSX.Element {
     dispatch(setOfferFavoriteStatusAction({id, favoriteStatus}));
   };
 
-  // const handleMouseOver = () => dispatch(activeMarkerMap(id));
-  // const handleMouseOut = () => dispatch(activeMarkerMap(null));
-
   return (
     <article
       className="cities__place-card place-card"
-      // onMouseOver={handleMouseOver}
-      // onMouseOut={handleMouseOut}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       {
         <div className={`${isPremium ? 'place-card place-card__mark' : ''}`}>

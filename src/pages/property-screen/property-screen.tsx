@@ -16,7 +16,6 @@ import PropertyReviewForm from '../../components/property-review-form/property-r
 
 
 function PropertyScreen(): JSX.Element {
-  const [active, setActive] = useState<number | null>(null);
   const offer = useAppSelector(getOfferInfo);
   const isCurrenOfferDataLoading = useAppSelector(getCurrentOfferDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -138,7 +137,6 @@ function PropertyScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map points={offer} active={active} />
             </section>
           </section>
           <div className="container">

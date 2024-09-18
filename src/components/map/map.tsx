@@ -1,9 +1,10 @@
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import { Offer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
 
 type MapProps = {
   points: Offer[];
@@ -21,11 +22,27 @@ const activeIcon = new Icon({
   iconAnchor: [27, 39]
 });
 
+const MapRecenter = ({latitude, longitude, zoom}: Offer['location']) => {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo([latitude, longitude], zoom);
+  }, [latitude, longitude, map, zoom]);
+  return null;
+};
+
 function Map({ points }: MapProps): JSX.Element {
-  const active = useAppSelector((state) => state.markerMap);
-  const {latitude, longitude} = points[0].city.location;
+  const active = useAppSelector((state) => state.USER.markerMap);
+
+  if(!points.length) {
+    return <div></div>;
+  }
+
+  const {latitude, longitude, zoom} = points[0].city.location;
+
   return (
-    <MapContainer center={[latitude, longitude]} zoom={10} style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}>
+    <MapContainer center={[latitude, longitude]} zoom={zoom} style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}>
+      <MapRecenter {...{latitude, longitude, zoom}}/>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
