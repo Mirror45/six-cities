@@ -137,13 +137,14 @@ function PropertyScreen(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
+              <Map points={nearbyOffers.slice(0, 3)}/>
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <AdCardList offers={nearbyOffers} />
+                <AdCardList offers={nearbyOffers.slice(0, 3)} />
               </div>
             </section>
           </div>
