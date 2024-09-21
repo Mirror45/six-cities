@@ -18,7 +18,7 @@ export const currentOfferData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOfferInfoAction.pending, (state, action) => {
+      .addCase(fetchOfferInfoAction.pending, (state) => {
         state.isCurrentOfferDataLoading = true;
       })
       .addCase(fetchOfferInfoAction.fulfilled, (

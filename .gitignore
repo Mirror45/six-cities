@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/dist
+# /dist
 
 # misc
 Thumbs.db
