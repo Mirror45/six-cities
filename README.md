@@ -105,7 +105,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/six-cities.git
+git clone https://github.com/Mirror45/six-cities.git
 
 cd six-cities
 
