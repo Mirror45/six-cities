@@ -81,19 +81,20 @@ export const fetchOfferInfoAction = createAsyncThunk<{offerData: Offer; nearbyOf
 export const sendOfferCommentAction = createAsyncThunk<Review[], {
   id: string;
   commentData: CommentData;
-  resetFormData: () => void;
-    },
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
+  resetFormData: () => void;}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
 }>(
     'sendOfferComment',
-    async({id, resetFormData, commentData}, { extra: api}) => {
-      const {data} = await api.post<Review[]>(`${APIRoute.Comment}/${id}`, commentData);
+    async({id, resetFormData, commentData}, { extra: api }) => {
+      await api.post(`${APIRoute.Comment}/${id}`, commentData);
+
+      const { data: commentsData } = await api.get<Review[]>(`${APIRoute.Comment}/${id}`);
+
       resetFormData();
 
-      return data;
+      return commentsData;
     }
     );
 
@@ -122,7 +123,6 @@ export const setOfferFavoriteStatusAction = createAsyncThunk<Offer, {
   }>(
     'setOfferFavoriteStatus',
     async({id, favoriteStatus}, {dispatch, extra: api}) => {
-      // const {data} = await api.post<Offer>(APIRoute.FavoriteOffers + id.toString() + APIRoute.JustSlash + favoriteStatus);
       const {data} = await api.post<Offer>(`${APIRoute.FavoriteOffers}/${id}/${favoriteStatus}`);
       dispatch(fetchFavoriteOffersAction());
 

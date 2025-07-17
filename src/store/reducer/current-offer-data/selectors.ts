@@ -5,5 +5,8 @@ import { Review } from '../../../types/review';
 
 export const getCurrentOfferDataLoadingStatus = (state: State): boolean => state[SlicesName.CurrentOfferData].isCurrentOfferDataLoading;
 export const getOfferInfo = (state: State): Offer | null => state[SlicesName.CurrentOfferData].offerInfo;
-export const getComments = (state: State): Review[] => state[SlicesName.CurrentOfferData].comments;
+export const getComments = (state: State): Review[] => {
+  const comments = state[SlicesName.CurrentOfferData].comments;
+  return Array.isArray(comments) ? comments : [];
+};
 export const getNearbyOffers = (state: State): Offer[] => state[SlicesName.CurrentOfferData].nearbyOffers;
